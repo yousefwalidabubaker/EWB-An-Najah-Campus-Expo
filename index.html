@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="CampusFlow manages university events, capacity, and registrations.">
+    <title>CampusFlow</title>
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <header class="siteHeader">
+      <a class="brand" href="/" aria-label="CampusFlow home">
+        <span class="brandMark">CF</span>
+        <span>CampusFlow</span>
+      </a>
+      <button class="primaryButton" id="openCreateButton" type="button">Create event</button>
+    </header>
+
+    <main>
+      <section class="hero">
+        <div>
+          <p class="eyebrow">University event management</p>
+          <h1>Plan better events. Fill every seat.</h1>
+          <p class="heroText">Manage workshops, registrations, capacity, and event performance from one focused dashboard.</p>
+        </div>
+        <div class="heroBadge" aria-label="System status">
+          <span class="statusDot"></span>
+          API connected
+        </div>
+      </section>
+
+      <section class="statsGrid" aria-label="Dashboard statistics">
+        <article class="statCard">
+          <span>Total events</span>
+          <strong id="totalEvents">0</strong>
+        </article>
+        <article class="statCard">
+          <span>Upcoming</span>
+          <strong id="upcomingEvents">0</strong>
+        </article>
+        <article class="statCard">
+          <span>Registrations</span>
+          <strong id="totalRegistrations">0</strong>
+        </article>
+        <article class="statCard">
+          <span>Occupancy</span>
+          <strong><span id="occupancyRate">0</span>%</strong>
+        </article>
+      </section>
+
+      <section class="eventsSection">
+        <div class="sectionHeading">
+          <div>
+            <p class="eyebrow">Event directory</p>
+            <h2>Find the right opportunity</h2>
+          </div>
+          <span id="resultCount" class="resultCount">0 events</span>
+        </div>
+
+        <form class="filters" id="filterForm" role="search">
+          <label class="searchField">
+            <span class="srOnly">Search events</span>
+            <input id="searchInput" name="search" type="search" placeholder="Search title, topic, or location">
+          </label>
+          <label>
+            <span class="srOnly">Category</span>
+            <select id="categoryFilter" name="category">
+              <option value="">All categories</option>
+              <option value="Technology">Technology</option>
+              <option value="Career">Career</option>
+              <option value="Design">Design</option>
+              <option value="Community">Community</option>
+            </select>
+          </label>
+          <label>
+            <span class="srOnly">Status</span>
+            <select id="statusFilter" name="status">
+              <option value="upcoming">Upcoming</option>
+              <option value="available">Seats available</option>
+              <option value="full">Full</option>
+              <option value="past">Past</option>
+              <option value="">All events</option>
+            </select>
+          </label>
+        </form>
+
+        <div class="eventsGrid" id="eventsGrid" aria-live="polite"></div>
+        <div class="emptyState" id="emptyState" hidden>
+          <strong>No events found</strong>
+          <p>Try changing the filters or create a new event.</p>
+        </div>
+      </section>
+    </main>
+
+    <dialog id="createDialog">
+      <form class="dialogCard" id="createEventForm">
+        <div class="dialogHeading">
+          <div>
+            <p class="eyebrow">New opportunity</p>
+            <h2>Create an event</h2>
+          </div>
+          <button class="iconButton" type="button" dataClose="createDialog" aria-label="Close dialog">×</button>
+        </div>
+
+        <label>Title<input name="title" required minlength="3" maxlength="100"></label>
+        <label>Description<textarea name="description" required minlength="10" maxlength="1000" rows="4"></textarea></label>
+        <div class="formRow">
+          <label>Category
+            <select name="category" required>
+              <option value="Technology">Technology</option>
+              <option value="Career">Career</option>
+              <option value="Design">Design</option>
+              <option value="Community">Community</option>
+            </select>
+          </label>
+          <label>Capacity<input name="capacity" type="number" required min="1" max="500" value="30"></label>
+        </div>
+        <label>Location<input name="location" required minlength="2" maxlength="100"></label>
+        <label>Start date and time<input name="startsAt" type="datetime-local" required></label>
+
+        <div class="dialogActions">
+          <button class="secondaryButton" type="button" dataClose="createDialog">Cancel</button>
+          <button class="primaryButton" type="submit">Save event</button>
+        </div>
+      </form>
+    </dialog>
+
+    <dialog id="registerDialog">
+      <form class="dialogCard" id="registrationForm">
+        <div class="dialogHeading">
+          <div>
+            <p class="eyebrow">Reserve a seat</p>
+            <h2 id="registrationTitle">Event registration</h2>
+          </div>
+          <button class="iconButton" type="button" dataClose="registerDialog" aria-label="Close dialog">×</button>
+        </div>
+        <input name="eventId" type="hidden">
+        <label>Full name<input name="name" required minlength="2" maxlength="80" autocomplete="name"></label>
+        <label>Email address<input name="email" type="email" required autocomplete="email"></label>
+        <div class="dialogActions">
+          <button class="secondaryButton" type="button" dataClose="registerDialog">Cancel</button>
+          <button class="primaryButton" type="submit">Confirm registration</button>
+        </div>
+      </form>
+    </dialog>
+
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+  </body>
+</html>
