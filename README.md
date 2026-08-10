@@ -67,7 +67,7 @@ The test suite starts the real Express application with an isolated in memory da
 | --- | --- | --- |
 | GET | `/api/health` | Service status |
 | GET | `/api/dashboard` | Summary metrics |
-| GET | `/api/events` | Search and filter events |
+| GET | `/api/events  | Search and filter events |
 | GET | `/api/events/:id` | Retrieve one event |
 | POST | `/api/events` | Create an event |
 | PATCH | `/api/events/:id` | Update an event |
@@ -86,6 +86,18 @@ Event list filters include `search`, `category`, and `status`. Supported status 
 * Frontend content is escaped before it enters rendered event cards.
 * Static routes expose only the three browser files, not server source or database files.
 * Error responses use a consistent JSON structure that the interface can display.
+
+## What I learned
+
+* Central validation keeps the interface and API consistent.
+* Transactions and database constraints protect registration and capacity updates.
+* Integration tests reveal edge cases around duplicate registrations, full events, and capacity changes.
+
+## Possible next steps
+
+* Add organizer accounts with role based permissions.
+* Add waitlists and registration confirmation emails.
+* Deploy the API with a managed SQL database and an automated test workflow.
 
 ## Project background
 
