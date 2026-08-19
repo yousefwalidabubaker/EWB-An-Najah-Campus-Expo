@@ -3,148 +3,174 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="CampusFlow manages university events, capacity, and registrations.">
+    <meta name="description" content="CampusFlow is a Vue app for finding and managing university events.">
     <title>CampusFlow</title>
-    <link rel="stylesheet" href="/styles.css">
-    <script src="/app.js" defer></script>
+    <link rel="stylesheet" href="./src/styles.css">
   </head>
   <body>
-    <header class="siteHeader">
-      <a class="brand" href="/" aria-label="CampusFlow home">
-        <span class="brandMark">CF</span>
-        <span>CampusFlow</span>
-      </a>
-      <button class="primaryButton" id="openCreateButton" type="button">Create event</button>
-    </header>
-
-    <main>
-      <section class="hero">
-        <div>
-          <p class="eyebrow">University event management</p>
-          <h1>Plan better events. Fill every seat.</h1>
-          <p class="heroText">Manage workshops, registrations, capacity, and event performance from one focused dashboard.</p>
+    <div id="app" v-cloak>
+      <header class="siteHeader">
+        <a class="brand" href="./" aria-label="CampusFlow home">
+          <span class="brandMark">CF</span>
+          <span>CampusFlow</span>
+        </a>
+        <div class="headerActions">
+          <button class="secondaryButton" type="button" @click="resetDemo">Reset demo</button>
+          <button class="primaryButton" type="button" @click="showCreate = true">Create event</button>
         </div>
-        <div class="heroBadge" aria-label="System status">
-          <span class="statusDot"></span>
-          API connected
-        </div>
-      </section>
+      </header>
 
-      <section class="statsGrid" aria-label="Dashboard statistics">
-        <article class="statCard">
-          <span>Total events</span>
-          <strong id="totalEvents">0</strong>
-        </article>
-        <article class="statCard">
-          <span>Upcoming</span>
-          <strong id="upcomingEvents">0</strong>
-        </article>
-        <article class="statCard">
-          <span>Registrations</span>
-          <strong id="totalRegistrations">0</strong>
-        </article>
-        <article class="statCard">
-          <span>Occupancy</span>
-          <strong><span id="occupancyRate">0</span>%</strong>
-        </article>
-      </section>
-
-      <section class="eventsSection">
-        <div class="sectionHeading">
+      <main>
+        <section class="hero">
           <div>
-            <p class="eyebrow">Event directory</p>
-            <h2>Find the right opportunity</h2>
+            <p class="eyebrow">University events</p>
+            <h1>Find your next campus opportunity.</h1>
+            <p class="heroText">Browse workshops and student events, check available seats, and register from one simple dashboard.</p>
           </div>
-          <span id="resultCount" class="resultCount">0 events</span>
-        </div>
-
-        <form class="filters" id="filterForm" role="search">
-          <label class="searchField">
-            <span class="srOnly">Search events</span>
-            <input id="searchInput" name="search" type="search" placeholder="Search title, topic, or location">
-          </label>
-          <label>
-            <span class="srOnly">Category</span>
-            <select id="categoryFilter" name="category">
-              <option value="">All categories</option>
-              <option value="Technology">Technology</option>
-              <option value="Career">Career</option>
-              <option value="Design">Design</option>
-              <option value="Community">Community</option>
-            </select>
-          </label>
-          <label>
-            <span class="srOnly">Status</span>
-            <select id="statusFilter" name="status">
-              <option value="upcoming">Upcoming</option>
-              <option value="available">Seats available</option>
-              <option value="full">Full</option>
-              <option value="past">Past</option>
-              <option value="">All events</option>
-            </select>
-          </label>
-        </form>
-
-        <div class="eventsGrid" id="eventsGrid" aria-live="polite"></div>
-        <div class="emptyState" id="emptyState" hidden>
-          <strong>No events found</strong>
-          <p>Try changing the filters or create a new event.</p>
-        </div>
-      </section>
-    </main>
-
-    <dialog id="createDialog">
-      <form class="dialogCard" id="createEventForm">
-        <div class="dialogHeading">
-          <div>
-            <p class="eyebrow">New opportunity</p>
-            <h2>Create an event</h2>
+          <div class="heroBadge">
+            <span class="statusDot"></span>
+            {{ events.length }} events loaded
           </div>
-          <button class="iconButton" type="button" dataClose="createDialog" aria-label="Close dialog">×</button>
-        </div>
+        </section>
 
-        <label>Title<input name="title" required minlength="3" maxlength="100"></label>
-        <label>Description<textarea name="description" required minlength="10" maxlength="1000" rows="4"></textarea></label>
-        <div class="formRow">
-          <label>Category
-            <select name="category" required>
-              <option value="Technology">Technology</option>
-              <option value="Career">Career</option>
-              <option value="Design">Design</option>
-              <option value="Community">Community</option>
-            </select>
-          </label>
-          <label>Capacity<input name="capacity" type="number" required min="1" max="500" value="30"></label>
-        </div>
-        <label>Location<input name="location" required minlength="2" maxlength="100"></label>
-        <label>Start date and time<input name="startsAt" type="datetime-local" required></label>
+        <section class="statsGrid" aria-label="Dashboard statistics">
+          <article class="statCard">
+            <span>Total events</span>
+            <strong>{{ events.length }}</strong>
+          </article>
+          <article class="statCard">
+            <span>Available events</span>
+            <strong>{{ availableEvents }}</strong>
+          </article>
+          <article class="statCard">
+            <span>Registrations</span>
+            <strong>{{ totalRegistrations }}</strong>
+          </article>
+          <article class="statCard">
+            <span>Occupancy</span>
+            <strong>{{ occupancyRate }}%</strong>
+          </article>
+        </section>
 
-        <div class="dialogActions">
-          <button class="secondaryButton" type="button" dataClose="createDialog">Cancel</button>
-          <button class="primaryButton" type="submit">Save event</button>
-        </div>
-      </form>
-    </dialog>
-
-    <dialog id="registerDialog">
-      <form class="dialogCard" id="registrationForm">
-        <div class="dialogHeading">
-          <div>
-            <p class="eyebrow">Reserve a seat</p>
-            <h2 id="registrationTitle">Event registration</h2>
+        <section class="eventsSection">
+          <div class="sectionHeading">
+            <div>
+              <p class="eyebrow">Event directory</p>
+              <h2>Explore campus events</h2>
+            </div>
+            <span class="resultCount">{{ filteredEvents.length }} {{ filteredEvents.length === 1 ? 'event' : 'events' }}</span>
           </div>
-          <button class="iconButton" type="button" dataClose="registerDialog" aria-label="Close dialog">×</button>
-        </div>
-        <input name="eventId" type="hidden">
-        <label>Full name<input name="name" required minlength="2" maxlength="80" autocomplete="name"></label>
-        <label>Email address<input name="email" type="email" required autocomplete="email"></label>
-        <div class="dialogActions">
-          <button class="secondaryButton" type="button" dataClose="registerDialog">Cancel</button>
-          <button class="primaryButton" type="submit">Confirm registration</button>
-        </div>
-      </form>
-    </dialog>
 
-    <div class="toast" id="toast" role="status" aria-live="polite"></div>
+          <div class="filters" role="search">
+            <label class="searchField">
+              <span class="srOnly">Search events</span>
+              <input v-model.trim="search" type="search" placeholder="Search title, topic, or location">
+            </label>
+            <label>
+              <span class="srOnly">Category</span>
+              <select v-model="category">
+                <option value="all">All categories</option>
+                <option v-for="item in categories" :key="item" :value="item">{{ item }}</option>
+              </select>
+            </label>
+            <label>
+              <span class="srOnly">Status</span>
+              <select v-model="status">
+                <option value="all">All statuses</option>
+                <option value="available">Seats available</option>
+                <option value="full">Full</option>
+              </select>
+            </label>
+          </div>
+
+          <div v-if="filteredEvents.length" class="eventsGrid">
+            <article v-for="event in filteredEvents" :key="event.id" class="eventCard">
+              <div class="cardTop">
+                <span class="categoryTag">{{ event.category }}</span>
+                <span class="dateText">{{ formatDate(event.startsAt) }}</span>
+              </div>
+              <h3>{{ event.title }}</h3>
+              <p class="eventDescription">{{ event.description }}</p>
+              <div class="eventMeta">
+                <span>{{ event.location }}</span>
+                <span>{{ formatTime(event.startsAt) }}</span>
+              </div>
+              <div class="capacityRow">
+                <span>{{ event.registered }} registered</span>
+                <span>{{ spotsLeft(event) }} spots left</span>
+              </div>
+              <div class="progressTrack" :aria-label="occupancy(event) + '% full'">
+                <div class="progressBar" :style="{ width: occupancy(event) + '%' }"></div>
+              </div>
+              <button class="primaryButton" type="button" :disabled="spotsLeft(event) === 0" @click="openRegistration(event)">
+                {{ spotsLeft(event) === 0 ? 'Event full' : 'Register' }}
+              </button>
+            </article>
+          </div>
+
+          <div v-else class="emptyState">
+            <strong>No events found</strong>
+            <p>Try another search or filter.</p>
+          </div>
+        </section>
+      </main>
+
+      <div v-if="showCreate" class="modalBackdrop" @click.self="showCreate = false">
+        <section class="modalCard" role="dialog" aria-modal="true" aria-labelledby="createTitle">
+          <div class="dialogHeading">
+            <div>
+              <p class="eyebrow">New event</p>
+              <h2 id="createTitle">Create an event</h2>
+            </div>
+            <button class="iconButton" type="button" aria-label="Close" @click="showCreate = false">×</button>
+          </div>
+
+          <form class="formGrid" @submit.prevent="createEvent">
+            <label>Title<input v-model.trim="newEvent.title" required minlength="3" maxlength="80"></label>
+            <label>Description<textarea v-model.trim="newEvent.description" required minlength="10" maxlength="300" rows="4"></textarea></label>
+            <div class="formRow">
+              <label>Category
+                <select v-model="newEvent.category" required>
+                  <option v-for="item in categories" :key="item" :value="item">{{ item }}</option>
+                </select>
+              </label>
+              <label>Capacity<input v-model.number="newEvent.capacity" type="number" min="1" max="200" required></label>
+            </div>
+            <label>Location<input v-model.trim="newEvent.location" required minlength="2" maxlength="80"></label>
+            <label>Date and time<input v-model="newEvent.startsAt" type="datetime-local" required></label>
+            <div class="dialogActions">
+              <button class="secondaryButton" type="button" @click="showCreate = false">Cancel</button>
+              <button class="primaryButton" type="submit">Save event</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div v-if="showRegister" class="modalBackdrop" @click.self="closeRegistration">
+        <section class="modalCard" role="dialog" aria-modal="true" aria-labelledby="registerTitle">
+          <div class="dialogHeading">
+            <div>
+              <p class="eyebrow">Reserve a seat</p>
+              <h2 id="registerTitle">{{ selectedEvent?.title }}</h2>
+            </div>
+            <button class="iconButton" type="button" aria-label="Close" @click="closeRegistration">×</button>
+          </div>
+
+          <form class="formGrid" @submit.prevent="registerForEvent">
+            <label>Full name<input v-model.trim="registration.name" required minlength="2" maxlength="60" autocomplete="name"></label>
+            <label>Email<input v-model.trim="registration.email" type="email" required autocomplete="email"></label>
+            <div class="dialogActions">
+              <button class="secondaryButton" type="button" @click="closeRegistration">Cancel</button>
+              <button class="primaryButton" type="submit">Confirm registration</button>
+            </div>
+          </form>
+        </section>
+      </div>
+
+      <div v-if="message" class="toast" role="status">{{ message }}</div>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="./src/app.js"></script>
   </body>
 </html>

@@ -1,106 +1,63 @@
 # CampusFlow
 
-CampusFlow is a full stack web application for managing university workshops, events, registrations, and capacity from one dashboard.
+CampusFlow is a small frontend web app for discovering and managing university events.
 
-The workflow is based on practical problems I encountered while coordinating student programs and technical events. Organizers need a clear view of attendance, students need a simple registration experience, and capacity rules must remain reliable when several people register.
+I wanted the project to solve a simple campus problem: students often hear about workshops and events in different places, while organizers need an easy way to see capacity and registrations. CampusFlow puts those basic actions in one dashboard.
 
-## What it includes
+## Live Demo
 
-* Responsive event dashboard built with semantic HTML and modern CSS
-* Vanilla JavaScript frontend with search, filtering, forms, dialogs, and live updates
-* REST API built with Node.js and Express
-* SQLite persistence with foreign keys, constraints, transactions, and indexes
-* Event creation, editing, deletion, search, and status filtering
-* Registration workflow with duplicate prevention and capacity protection
-* Dashboard metrics for events, registrations, and occupancy
-* Central validation, structured errors, secure HTTP headers, and request size limits
-* Integration tests using the Node.js test runner and real HTTP requests
+https://yousefwalidabubaker.github.io/CampusFlow/
 
-## Technology
+## Features
 
-| Layer | Tools |
-| --- | --- |
-| Interface | HTML, CSS, JavaScript |
-| Server | Node.js, Express |
-| Database | SQLite, SQL, better sqlite3 |
-| Security | Helmet, input validation, parameterized queries |
-| Testing | Node.js test runner, Assert, Fetch API |
+- Browse university events in a responsive card layout
+- Search by title, description, or location
+- Filter events by category and seat availability
+- Create a new event from a form
+- Register for an event and see the seat count update immediately
+- Dashboard statistics that update when the data changes
+- Local storage so changes remain after refreshing the page
+- Reset button to restore the original demo data
 
-## Architecture
+## Built With
+
+- HTML
+- CSS
+- JavaScript
+- Vue 3
+- Browser Local Storage
+- GitHub Pages
+
+## Project Structure
 
 ```text
-Browser interface
-      |
-Express REST API
-      |
-Validation and business rules
-      |
-SQLite database
+CampusFlow/
+├── index.html
+└── src/
+    ├── app.js
+    └── styles.css
 ```
 
-The browser communicates only through JSON endpoints. The API owns validation, capacity checks, duplicate prevention, and database operations. SQLite constraints provide a second layer of protection for data integrity.
+## What I Practiced
 
-## Run locally
+This project helped me practice the frontend fundamentals I want to keep improving:
 
-Requirements: Node.js 20 or newer.
+- Vue state and computed values
+- Event handling with buttons and forms
+- Conditional rendering and list rendering
+- Search and filtering logic
+- Form validation
+- Updating the interface when data changes
+- Saving data in local storage
+- Responsive CSS
+
+## Run Locally
+
+Clone the repository and open `index.html` in a browser. You can also use a local extension such as Live Server in VS Code.
 
 ```bash
-npm install
-npm start
+git clone https://github.com/yousefwalidabubaker/CampusFlow.git
+cd CampusFlow
 ```
 
-Open `http://localhost:3000`.
-
-The database is created automatically and includes three clearly labeled demo events on the first run.
-
-## Run the tests
-
-```bash
-npm test
-```
-
-The test suite starts the real Express application with an isolated in memory database. It verifies health checks, event creation, validation, registration limits, duplicate prevention, dashboard calculations, and safe capacity updates.
-
-## API overview
-
-| Method | Endpoint | Purpose |
-| --- | --- | --- |
-| GET | `/api/health` | Service status |
-| GET | `/api/dashboard` | Summary metrics |
-| GET | `/api/events  | Search and filter events |
-| GET | `/api/events/:id` | Retrieve one event |
-| POST | `/api/events` | Create an event |
-| PATCH | `/api/events/:id` | Update an event |
-| DELETE | `/api/events/:id` | Delete an event |
-| GET | `/api/events/:id/registrations` | List registrations |
-| POST | `/api/events/:id/registrations` | Reserve a seat |
-| DELETE | `/api/events/:eventId/registrations/:registrationId` | Cancel a registration |
-
-Event list filters include `search`, `category`, and `status`. Supported status values are `upcoming`, `available`, `full`, and `past`.
-
-## Engineering decisions
-
-* Registration and capacity checks run inside a database transaction.
-* Emails are normalized before storage and protected by a unique database constraint.
-* SQL statements use parameters instead of building queries from untrusted values.
-* Frontend content is escaped before it enters rendered event cards.
-* Static routes expose only the three browser files, not server source or database files.
-* Error responses use a consistent JSON structure that the interface can display.
-
-## What I learned
-
-* Central validation keeps the interface and API consistent.
-* Transactions and database constraints protect registration and capacity updates.
-* Integration tests reveal edge cases around duplicate registrations, full events, and capacity changes.
-
-## Possible next steps
-
-* Add organizer accounts with role based permissions.
-* Add waitlists and registration confirmation emails.
-* Deploy the API with a managed SQL database and an automated test workflow.
-
-## Project background
-
-I am a fourth year Computer Science student at An Najah National University. CampusFlow connects my software engineering studies with my experience coordinating university workshops, capacity building programs, and student technology events.
-
-Built by Yousef AbuBaker.
+No backend or database setup is required for this version.
