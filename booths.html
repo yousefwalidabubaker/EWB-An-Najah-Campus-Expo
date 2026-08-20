@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="EWB Campus Expo 2025 booth directory.">
+    <title>Booths | EWB Campus Expo 2025</title>
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <header class="topbar">
+        <div class="pageShell topbarInner">
+          <a class="wordmark" href="index.html">EWB / AN-NAJAH</a>
+          <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a class="active" href="booths.html">Booths</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="reserve.html">Reserve</a>
+            <a href="about.html">About</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="pageShell">
+        <section class="pageHero">
+          <p class="sectionLabel">01 / BOOTH DIRECTORY</p>
+          <h1>Explore the booths.</h1>
+          <p>Search the demo directory by project or team name, or filter by area.</p>
+        </section>
+
+        <section class="sectionBlock compactTop">
+          <div class="directoryTools">
+            <label>
+              <span>Search</span>
+              <input v-model.trim="boothSearch" type="search" placeholder="Project or team name">
+            </label>
+            <label>
+              <span>Area</span>
+              <select v-model="boothCategory">
+                <option value="all">All areas</option>
+                <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+              </select>
+            </label>
+          </div>
+
+          <div class="resultLine">Showing {{ filteredBooths.length }} of {{ booths.length }} booths</div>
+
+          <div v-if="filteredBooths.length" class="boothList">
+            <article v-for="booth in filteredBooths" :key="booth.id" class="boothRow">
+              <span class="boothNumber">{{ String(booth.id).padStart(2, '0') }}</span>
+              <div class="boothMain">
+                <h3>{{ booth.title }}</h3>
+                <p>{{ booth.team }}</p>
+              </div>
+              <span class="boothCategory">{{ booth.category }}</span>
+            </article>
+          </div>
+
+          <p v-else class="emptyMessage">No booths match this search.</p>
+        </section>
+
+        <section class="pageCallout">
+          <div>
+            <p class="sectionLabel">WANT A BOOTH?</p>
+            <h2>Try the exhibitor request form.</h2>
+          </div>
+          <a class="textLink" href="reserve.html">Open reservations →</a>
+        </section>
+      </main>
+
+      <footer>
+        <div class="pageShell footerInner">
+          <p>EWB Campus Expo 2025 · An-Najah</p>
+          <a href="index.html">Back home</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
