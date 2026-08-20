@@ -1,35 +1,32 @@
 # EWB Campus Expo 2025
 
-A multi-page frontend portal inspired by the real EWB Campus Expo held at An-Najah National University on **20 March 2025**.
+Event website for **EWB Campus Expo 2025**, held at An-Najah National University on **20 March 2025** by EWB An-Najah.
 
-I built the project around a simple idea: instead of putting everything on one long page, visitors can move through separate pages for the booth directory, schedule, reservations, and information about the expo.
-
-## Live Demo
+## Live Website
 
 https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 
-## Pages
+## Website Pages
 
-- **Home** - event overview and links to the main parts of the portal
-- **Booths** - searchable and filterable student project directory
-- **Schedule** - a demo day plan for the expo portal
-- **Reserve** - interactive visitor and exhibitor forms
-- **About** - project story, real event date, and what I practiced
+- **Home** - event overview and main links
+- **Booths** - searchable and filterable booth directory
+- **Schedule** - expo day schedule
+- **Reserve** - visitor reservation and exhibitor booth request forms
+- **About** - event information and EWB An-Najah
 
-## Main features
+## Features
 
-- Searches booths by project or team name
-- Filters booths by area
-- Lets visitors reserve between 1 and 4 seats
-- Updates remaining visitor seats after a reservation
-- Lets student teams submit a booth request
-- Adds submitted booths to the directory
-- Tracks remaining booth spaces
-- Saves demo changes in browser local storage
-- Restores the sample data with a reset button
-- Uses the same responsive navigation and visual identity across multiple pages
+- Search booths by project or team name
+- Filter booths by area
+- Reserve between 1 and 4 visitor seats
+- Update remaining seat availability after a reservation
+- Submit an exhibitor booth request
+- Add submitted booths to the directory
+- Track remaining booth spaces
+- Save reservation and booth information in browser local storage
+- Responsive layout for desktop and mobile
 
-## Built with
+## Built With
 
 - HTML
 - CSS
@@ -38,7 +35,7 @@ https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 - Browser Local Storage
 - GitHub Pages
 
-## Project structure
+## Structure
 
 ```text
 EWB-An-Najah-Campus-Expo/
@@ -52,31 +49,11 @@ EWB-An-Najah-Campus-Expo/
     └── styles.css
 ```
 
-## Things I practiced
-
-- Building a small multi-page website
-- Vue data and computed values
-- Form handling and validation
-- Button and input events
-- Conditional rendering
-- Rendering lists with `v-for`
-- Search and filter logic
-- Updating displayed information from user input
-- Saving simple data in local storage
-- Responsive CSS without a UI library
-- Keeping navigation and design consistent between pages
-
-## Note about the data
-
-The event name and date are real. The booth names, reservation numbers, and detailed schedule used in the website are demo data for the frontend project.
-
-## Run locally
-
-Clone the repository and open `index.html` with a local server such as Live Server in VS Code.
+## Run Locally
 
 ```bash
 git clone https://github.com/yousefwalidabubaker/EWB-An-Najah-Campus-Expo.git
 cd EWB-An-Najah-Campus-Expo
 ```
 
-The project does not need a backend or database.
+Open `index.html` with a local server such as Live Server in VS Code.
