@@ -123,17 +123,6 @@ Vue.createApp({
         summary: ""
       };
       this.message = `${projectTitle} was added to the booth list.`;
-    },
-
-    resetDemo() {
-      this.booths = structuredClone(initialBooths);
-      this.visitorCount = 96;
-      this.boothSearch = "";
-      this.boothCategory = "all";
-      this.activeForm = "visitor";
-      this.message = "Sample data restored.";
-      localStorage.removeItem("ewb-expo-booths");
-      localStorage.removeItem("ewb-expo-visitors");
     }
   }
 }).mount("#app");
