@@ -1,25 +1,30 @@
-# CampusFlow
+# EWB Najah Campus Expo
 
-CampusFlow is a small frontend web app for discovering and managing university events.
+A small frontend portal for a student engineering expo at An-Najah National University.
 
-I wanted the project to solve a simple campus problem: students often hear about workshops and events in different places, while organizers need an easy way to see capacity and registrations. CampusFlow puts those basic actions in one dashboard.
+The idea came from my time working with Engineers Without Borders at An-Najah. I wanted one simple page where students could see who was exhibiting, check the day schedule, reserve visitor seats, or request a booth for a student project.
+
+The event shown in the demo is dated **20 March 2025**.
 
 ## Live Demo
 
 https://yousefwalidabubaker.github.io/CampusFlow/
 
-## Features
+## What it does
 
-- Browse university events in a responsive card layout
-- Search by title, description, or location
-- Filter events by category and seat availability
-- Create a new event from a form
-- Register for an event and see the seat count update immediately
-- Dashboard statistics that update when the data changes
-- Local storage so changes remain after refreshing the page
-- Reset button to restore the original demo data
+- Shows a directory of student project booths
+- Searches booths by project or team name
+- Filters booths by area
+- Displays a simple expo schedule
+- Lets visitors reserve between 1 and 4 seats
+- Updates the remaining visitor seat count after a reservation
+- Lets student teams submit a booth request
+- Adds submitted booths directly to the directory
+- Tracks the remaining booth spaces
+- Keeps booth and reservation changes in browser local storage
+- Restores the original sample data with a reset button
 
-## Built With
+## Built with
 
 - HTML
 - CSS
@@ -28,7 +33,7 @@ https://yousefwalidabubaker.github.io/CampusFlow/
 - Browser Local Storage
 - GitHub Pages
 
-## Project Structure
+## Project structure
 
 ```text
 CampusFlow/
@@ -38,26 +43,25 @@ CampusFlow/
     └── styles.css
 ```
 
-## What I Practiced
+## Things I practiced
 
-This project helped me practice the frontend fundamentals I want to keep improving:
+- Vue data and computed values
+- Form handling and validation
+- Button and input events
+- Conditional rendering
+- Rendering lists with `v-for`
+- Search and filter logic
+- Updating displayed information from user input
+- Saving simple data in local storage
+- Responsive CSS without a UI library
 
-- Vue state and computed values
-- Event handling with buttons and forms
-- Conditional rendering and list rendering
-- Search and filtering logic
-- Form validation
-- Updating the interface when data changes
-- Saving data in local storage
-- Responsive CSS
+## Run locally
 
-## Run Locally
-
-Clone the repository and open `index.html` in a browser. You can also use a local extension such as Live Server in VS Code.
+Clone the repository and open `index.html` with a local server such as Live Server in VS Code.
 
 ```bash
 git clone https://github.com/yousefwalidabubaker/CampusFlow.git
 cd CampusFlow
 ```
 
-No backend or database setup is required for this version.
+The project does not need a backend or database.
