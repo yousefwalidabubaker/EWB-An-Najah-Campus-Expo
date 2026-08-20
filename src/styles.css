@@ -7,13 +7,12 @@
 }
 
 :root {
-  --paper: #f6f3ea;
-  --ink: #171a17;
-  --muted: #666a64;
-  --line: #b9b9af;
-  --green: #1f4b3a;
-  --soft-green: #e2e8df;
-  --white: #fffdf8;
+  --red: #e51b23;
+  --yellow: #ffd400;
+  --white: #ffffff;
+  --black: #171717;
+  --gray: #666666;
+  --line: #d8d8d8;
 }
 
 html {
@@ -22,10 +21,9 @@ html {
 
 body {
   margin: 0;
-  background: var(--paper);
-  color: var(--ink);
+  background: var(--white);
+  color: var(--black);
   font-family: Arial, Helvetica, sans-serif;
-  font-size: 16px;
   line-height: 1.5;
 }
 
@@ -34,11 +32,6 @@ input,
 select,
 textarea {
   font: inherit;
-}
-
-button,
-a {
-  -webkit-tap-highlight-color: transparent;
 }
 
 a {
@@ -51,23 +44,22 @@ a {
 }
 
 .topbar {
-  border-bottom: 1px solid var(--ink);
-  background: var(--paper);
+  background: var(--red);
+  color: var(--white);
+  border-bottom: 6px solid var(--yellow);
 }
 
 .topbarInner {
+  min-height: 66px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  min-height: 64px;
   gap: 20px;
 }
 
 .wordmark {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 18px;
-  font-weight: 700;
-  letter-spacing: .02em;
+  font-size: 19px;
+  font-weight: 800;
   text-decoration: none;
 }
 
@@ -79,11 +71,11 @@ nav {
 
 nav a {
   text-decoration: none;
+  font-weight: 700;
 }
 
-nav a:hover,
-.textLink:hover {
-  text-decoration: underline;
+nav a:hover {
+  color: var(--yellow);
 }
 
 main {
@@ -92,35 +84,36 @@ main {
 
 .intro {
   display: grid;
-  grid-template-columns: minmax(0, 1.6fr) minmax(240px, .7fr);
-  gap: 60px;
-  padding: 72px 0 56px;
-  border-bottom: 1px solid var(--ink);
+  grid-template-columns: 1.6fr .7fr;
+  gap: 54px;
+  padding: 70px 0 56px;
+  border-bottom: 2px solid var(--black);
 }
 
 .sectionLabel,
 .noteTitle,
 .formTitle span {
   margin: 0;
-  color: var(--green);
-  font-family: "Courier New", Courier, monospace;
+  color: var(--red);
+  font-family: "Courier New", monospace;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .06em;
 }
 
 .intro h1 {
   max-width: 650px;
-  margin: 16px 0 20px;
+  margin: 14px 0 20px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(52px, 8vw, 86px);
   font-weight: 400;
   line-height: .95;
-  letter-spacing: -.04em;
 }
 
 .intro h1 span {
-  color: var(--green);
+  display: inline-block;
+  background: var(--yellow);
+  color: var(--red);
+  padding: 0 8px 5px;
 }
 
 .lead {
@@ -130,31 +123,44 @@ main {
 }
 
 .textLink {
+  display: inline-block;
+  padding: 10px 14px;
+  background: var(--red);
+  color: var(--white);
   font-weight: 700;
   text-decoration: none;
 }
 
+.textLink:hover {
+  background: var(--black);
+}
+
 .eventNote {
   align-self: end;
-  padding-top: 10px;
-  border-top: 4px solid var(--green);
+  padding: 18px;
+  background: var(--yellow);
+  border: 2px solid var(--black);
+}
+
+.noteTitle {
+  color: var(--black);
 }
 
 .eventNote dl {
-  margin: 16px 0 0;
+  margin: 14px 0 0;
 }
 
 .eventNote dl div {
   display: grid;
   grid-template-columns: 70px 1fr;
   gap: 14px;
-  padding: 10px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 9px 0;
+  border-bottom: 1px solid rgba(0, 0, 0, .25);
 }
 
 .eventNote dt {
-  color: var(--muted);
   font-size: 13px;
+  color: #444;
 }
 
 .eventNote dd {
@@ -165,16 +171,13 @@ main {
 .numbers {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  border-bottom: 1px solid var(--ink);
+  background: var(--black);
+  color: var(--white);
 }
 
 .numbers div {
-  padding: 24px 18px 24px 0;
-  border-right: 1px solid var(--line);
-}
-
-.numbers div:not(:first-child) {
-  padding-left: 18px;
+  padding: 24px 18px;
+  border-right: 1px solid #444;
 }
 
 .numbers div:last-child {
@@ -183,28 +186,28 @@ main {
 
 .numbers strong {
   display: block;
-  margin-bottom: 2px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 34px;
+  font-size: 36px;
   font-weight: 400;
+  color: var(--yellow);
 }
 
 .numbers span {
-  color: var(--muted);
   font-size: 13px;
+  color: #dddddd;
 }
 
 .sectionBlock {
   padding: 64px 0;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 2px solid var(--black);
 }
 
 .sectionHead {
   display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(220px, 320px);
+  grid-template-columns: 1fr 300px;
   gap: 40px;
   align-items: end;
-  margin-bottom: 34px;
+  margin-bottom: 32px;
 }
 
 .sectionHead h2 {
@@ -217,7 +220,7 @@ main {
 
 .sectionHead > p {
   margin: 0;
-  color: var(--muted);
+  color: var(--gray);
   font-size: 14px;
 }
 
@@ -232,7 +235,7 @@ main {
 .plainForm label {
   display: grid;
   gap: 6px;
-  color: var(--muted);
+  color: var(--gray);
   font-size: 13px;
 }
 
@@ -240,11 +243,11 @@ input,
 select,
 textarea {
   width: 100%;
-  border: 1px solid var(--ink);
+  border: 2px solid var(--black);
   border-radius: 0;
   background: var(--white);
-  color: var(--ink);
-  outline: 0;
+  color: var(--black);
+  outline: none;
 }
 
 input,
@@ -262,27 +265,31 @@ textarea {
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 2px solid var(--green);
-  outline-offset: 1px;
+  outline: 3px solid var(--yellow);
+  border-color: var(--red);
 }
 
 .boothList {
-  border-top: 1px solid var(--ink);
+  border-top: 2px solid var(--black);
 }
 
 .boothRow {
   display: grid;
-  grid-template-columns: 54px minmax(0, 1fr) 150px;
+  grid-template-columns: 54px 1fr 150px;
   gap: 18px;
   align-items: center;
   min-height: 82px;
   border-bottom: 1px solid var(--line);
 }
 
+.boothRow:hover {
+  background: #fff9cf;
+}
+
 .boothNumber {
-  color: var(--muted);
-  font-family: "Courier New", Courier, monospace;
-  font-size: 13px;
+  color: var(--red);
+  font-family: "Courier New", monospace;
+  font-weight: 700;
 }
 
 .boothMain h3 {
@@ -294,35 +301,31 @@ textarea:focus {
 
 .boothMain p {
   margin: 0;
-  color: var(--muted);
+  color: var(--gray);
   font-size: 13px;
 }
 
 .boothCategory {
   justify-self: end;
-  padding: 4px 7px;
-  border: 1px solid var(--green);
-  color: var(--green);
-  font-family: "Courier New", Courier, monospace;
+  padding: 5px 8px;
+  background: var(--yellow);
+  border: 1px solid var(--black);
+  color: var(--black);
+  font-family: "Courier New", monospace;
   font-size: 11px;
   text-transform: uppercase;
 }
 
 .emptyMessage {
   padding: 28px 0;
-  border-top: 1px solid var(--ink);
-  color: var(--muted);
-}
-
-.scheduleBlock {
-  padding-bottom: 48px;
+  color: var(--gray);
 }
 
 .scheduleList {
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 1px solid var(--ink);
+  border-top: 2px solid var(--black);
 }
 
 .scheduleList li {
@@ -334,18 +337,17 @@ textarea:focus {
 }
 
 .scheduleList time {
-  font-family: "Courier New", Courier, monospace;
-  color: var(--green);
+  color: var(--red);
+  font-family: "Courier New", monospace;
   font-weight: 700;
 }
 
 .scheduleList strong {
   display: block;
-  margin-bottom: 2px;
 }
 
 .scheduleList span {
-  color: var(--muted);
+  color: var(--gray);
   font-size: 14px;
 }
 
@@ -355,14 +357,14 @@ textarea:focus {
 
 .reservationLayout {
   display: grid;
-  grid-template-columns: 240px minmax(0, 1fr);
+  grid-template-columns: 240px 1fr;
   gap: 36px;
 }
 
 .choicePanel {
   display: grid;
   align-content: start;
-  border-top: 1px solid var(--ink);
+  border-top: 2px solid var(--black);
 }
 
 .choicePanel button {
@@ -372,15 +374,19 @@ textarea:focus {
   padding: 16px 10px;
   border: 0;
   border-bottom: 1px solid var(--line);
-  background: transparent;
-  color: var(--ink);
+  background: var(--white);
+  color: var(--black);
   text-align: left;
   cursor: pointer;
 }
 
-.choicePanel button:hover,
+.choicePanel button:hover {
+  background: #fff9cf;
+}
+
 .choicePanel button.selected {
-  background: var(--soft-green);
+  background: var(--yellow);
+  border-left: 6px solid var(--red);
 }
 
 .choicePanel span {
@@ -388,7 +394,7 @@ textarea:focus {
 }
 
 .choicePanel small {
-  color: var(--muted);
+  color: var(--gray);
 }
 
 .plainForm {
@@ -402,7 +408,7 @@ textarea:focus {
   justify-content: space-between;
   gap: 16px;
   padding-bottom: 10px;
-  border-bottom: 1px solid var(--ink);
+  border-bottom: 2px solid var(--black);
 }
 
 .formTitle strong {
@@ -420,43 +426,45 @@ textarea:focus {
   min-width: 150px;
   min-height: 44px;
   padding: 0 18px;
-  border: 1px solid var(--ink);
+  border: 2px solid var(--black);
   border-radius: 0;
-  background: var(--green);
-  color: white;
+  background: var(--red);
+  color: var(--white);
   font-weight: 700;
   cursor: pointer;
 }
 
 .submitButton:hover {
-  background: var(--ink);
+  background: var(--yellow);
+  color: var(--black);
 }
 
 .submitButton:disabled {
-  cursor: not-allowed;
   opacity: .45;
+  cursor: not-allowed;
 }
 
 .formMessage {
   max-width: 836px;
   margin: 22px 0 0 276px;
   padding: 10px 12px;
-  border-left: 4px solid var(--green);
-  background: var(--soft-green);
+  border-left: 6px solid var(--red);
+  background: var(--yellow);
   font-size: 14px;
 }
 
 footer {
-  border-top: 1px solid var(--ink);
-  background: #ebe7dc;
+  background: var(--red);
+  color: var(--white);
+  border-top: 6px solid var(--yellow);
 }
 
 .footerInner {
+  min-height: 74px;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 20px;
-  min-height: 74px;
   font-size: 13px;
 }
 
@@ -465,10 +473,9 @@ footer {
 }
 
 .footerInner button {
-  padding: 0;
   border: 0;
   background: transparent;
-  color: var(--muted);
+  color: var(--yellow);
   text-decoration: underline;
   cursor: pointer;
 }
@@ -481,24 +488,12 @@ footer {
   }
 
   .intro {
-    gap: 40px;
-    padding-top: 52px;
-  }
-
-  .eventNote {
-    max-width: 420px;
+    gap: 36px;
+    padding-top: 50px;
   }
 
   .numbers {
     grid-template-columns: repeat(2, 1fr);
-  }
-
-  .numbers div:nth-child(2) {
-    border-right: 0;
-  }
-
-  .numbers div:nth-child(-n+2) {
-    border-bottom: 1px solid var(--line);
   }
 
   .directoryTools {
@@ -516,8 +511,8 @@ footer {
   }
 
   .topbarInner {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     padding: 14px 0;
   }
 
@@ -535,15 +530,9 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .numbers div,
-  .numbers div:not(:first-child) {
-    padding: 16px 0;
+  .numbers div {
     border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .numbers div:last-child {
-    border-bottom: 0;
+    border-bottom: 1px solid #444;
   }
 
   .boothRow {
@@ -567,8 +556,8 @@ footer {
   }
 
   .footerInner {
-    align-items: flex-start;
     flex-direction: column;
+    align-items: flex-start;
     justify-content: center;
     padding: 18px 0;
   }
