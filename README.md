@@ -1,10 +1,10 @@
-# EWB Najah Campus Expo
+# EWB An-Najah Campus Expo
 
-A small frontend portal for a student engineering expo at An-Najah National University.
+A frontend portal for a student engineering expo at An-Najah National University.
 
-The idea came from my time working with Engineers Without Borders at An-Najah. I wanted one simple page where students could see who was exhibiting, check the day schedule, reserve visitor seats, or request a booth for a student project.
+The idea came from my time working with Engineers Without Borders at An-Najah. I wanted one simple page where students could see who is exhibiting, check the schedule, reserve visitor seats, or request a booth for a student project.
 
-The event shown in the demo is dated **20 March 2025**.
+The project is a demo, so the real event date and time are left as **To be announced** until an actual expo is scheduled.
 
 ## Live Demo
 
@@ -36,7 +36,7 @@ https://yousefwalidabubaker.github.io/CampusFlow/
 ## Project structure
 
 ```text
-CampusFlow/
+EWB-An-Najah-Campus-Expo/
 ├── index.html
 └── src/
     ├── app.js
