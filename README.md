@@ -4,7 +4,7 @@ A frontend portal for a student engineering expo at An-Najah National University
 
 The idea came from my time working with Engineers Without Borders at An-Najah. I wanted one simple page where students could see who is exhibiting, check the schedule, reserve visitor seats, or request a booth for a student project.
 
-The project is a demo, so the real event date and time are left as **To be announced** until an actual expo is scheduled.
+This project is based on a real EWB An-Najah Campus Expo held on **20 March 2025**.
 
 ## Live Demo
 
