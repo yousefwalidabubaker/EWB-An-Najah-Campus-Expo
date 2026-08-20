@@ -3,195 +3,104 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="EWB An-Najah Campus Expo portal for student project booths and visitor reservations.">
-    <title>EWB An-Najah Campus Expo</title>
+    <meta name="description" content="EWB Campus Expo 2025 at An-Najah National University.">
+    <title>EWB Campus Expo 2025</title>
     <link rel="stylesheet" href="./src/styles.css">
   </head>
   <body>
     <div id="app" v-cloak>
       <header class="topbar">
         <div class="pageShell topbarInner">
-          <a class="wordmark" href="#top">EWB / AN-NAJAH</a>
+          <a class="wordmark" href="index.html">EWB / AN-NAJAH</a>
           <nav aria-label="Main navigation">
-            <a href="#booths">Booths</a>
-            <a href="#schedule">Schedule</a>
-            <a href="#reserve">Reserve</a>
+            <a class="active" href="index.html">Home</a>
+            <a href="booths.html">Booths</a>
+            <a href="schedule.html">Schedule</a>
+            <a href="reserve.html">Reserve</a>
+            <a href="about.html">About</a>
           </nav>
         </div>
       </header>
 
-      <main id="top" class="pageShell">
-        <section class="intro">
+      <main class="pageShell">
+        <section class="intro homeIntro">
           <div class="introCopy">
             <p class="sectionLabel">Engineers Without Borders · An-Najah Student Chapter</p>
-            <h1>EWB Campus <span>Expo</span></h1>
-            <p class="lead">A student exhibition for project teams, makers, volunteers, and anyone who wants to see what students are building on campus.</p>
-            <a class="textLink" href="#reserve">Reserve a visitor seat →</a>
+            <h1>EWB Campus <span>Expo 2025</span></h1>
+            <p class="lead">A student exhibition built around projects, ideas, engineering, and community work at An-Najah National University.</p>
+            <div class="heroActions">
+              <a class="textLink" href="booths.html">Explore booths →</a>
+              <a class="outlineLink" href="about.html">About the expo</a>
+            </div>
           </div>
 
           <aside class="eventNote" aria-label="Event details">
             <p class="noteTitle">EVENT NOTE</p>
             <dl>
               <div><dt>Date</dt><dd>20 March 2025</dd></div>
-              <div><dt>Time</dt><dd>To be announced</dd></div>
               <div><dt>Place</dt><dd>An-Najah National University</dd></div>
-              <div><dt>Entry</dt><dd>Free with reservation</dd></div>
+              <div><dt>Type</dt><dd>Student project expo</dd></div>
+              <div><dt>Host</dt><dd>EWB An-Najah</dd></div>
             </dl>
           </aside>
         </section>
 
-        <section class="numbers" aria-label="Expo numbers">
-          <div><strong>{{ booths.length }}</strong><span>booths listed</span></div>
-          <div><strong>{{ visitorCount }}</strong><span>visitor seats reserved</span></div>
+        <section class="numbers" aria-label="Expo portal numbers">
+          <div><strong>{{ booths.length }}</strong><span>booths in the demo</span></div>
+          <div><strong>{{ visitorCount }}</strong><span>demo reservations</span></div>
           <div><strong>{{ visitorSpotsLeft }}</strong><span>visitor seats left</span></div>
           <div><strong>{{ boothSpotsLeft }}</strong><span>booth spaces left</span></div>
         </section>
 
-        <section id="booths" class="sectionBlock">
+        <section class="sectionBlock">
           <div class="sectionHead">
             <div>
-              <p class="sectionLabel">01 / BOOTH DIRECTORY</p>
-              <h2>Who is exhibiting?</h2>
+              <p class="sectionLabel">EXPLORE THE PORTAL</p>
+              <h2>More than one long page.</h2>
             </div>
-            <p>Search the current list or submit a booth request below.</p>
+            <p>Each part of the expo now has its own page and purpose.</p>
           </div>
 
-          <div class="directoryTools">
-            <label>
-              <span>Search</span>
-              <input v-model.trim="boothSearch" type="search" placeholder="Project or team name">
-            </label>
-            <label>
-              <span>Area</span>
-              <select v-model="boothCategory">
-                <option value="all">All areas</option>
-                <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
-              </select>
-            </label>
+          <div class="featureGrid">
+            <a class="featureCard" href="booths.html">
+              <span>01</span>
+              <h3>Booth directory</h3>
+              <p>Search student projects and filter them by area.</p>
+            </a>
+            <a class="featureCard" href="schedule.html">
+              <span>02</span>
+              <h3>Expo schedule</h3>
+              <p>See the day flow and the main activity blocks.</p>
+            </a>
+            <a class="featureCard" href="reserve.html">
+              <span>03</span>
+              <h3>Reservations</h3>
+              <p>Try the visitor and exhibitor forms used in the demo.</p>
+            </a>
+            <a class="featureCard" href="about.html">
+              <span>04</span>
+              <h3>About the project</h3>
+              <p>Read why I built this portal and what I practiced.</p>
+            </a>
           </div>
-
-          <div v-if="filteredBooths.length" class="boothList">
-            <article v-for="booth in filteredBooths" :key="booth.id" class="boothRow">
-              <span class="boothNumber">{{ String(booth.id).padStart(2, '0') }}</span>
-              <div class="boothMain">
-                <h3>{{ booth.title }}</h3>
-                <p>{{ booth.team }}</p>
-              </div>
-              <span class="boothCategory">{{ booth.category }}</span>
-            </article>
-          </div>
-
-          <p v-else class="emptyMessage">No booths match this search.</p>
         </section>
 
-        <section id="schedule" class="sectionBlock scheduleBlock">
-          <div class="sectionHead">
-            <div>
-              <p class="sectionLabel">02 / DAY PLAN</p>
-              <h2>Expo schedule</h2>
-            </div>
+        <section class="sectionBlock homeStory">
+          <div>
+            <p class="sectionLabel">WHY THIS PROJECT</p>
+            <h2>A real event turned into a frontend project.</h2>
           </div>
-
-          <ol class="scheduleList">
-            <li><time>10:00</time><div><strong>Doors open</strong><span>Visitor check-in and booth setup.</span></div></li>
-            <li><time>11:00</time><div><strong>Project walk-through</strong><span>Open floor with all student booths.</span></div></li>
-            <li><time>13:00</time><div><strong>Quick talks</strong><span>Five-minute talks from selected teams.</span></div></li>
-            <li><time>15:30</time><div><strong>Closing round</strong><span>Last booth visits and volunteer sign-ups.</span></div></li>
-          </ol>
-        </section>
-
-        <section id="reserve" class="sectionBlock reserveBlock">
-          <div class="sectionHead">
-            <div>
-              <p class="sectionLabel">03 / RESERVATIONS</p>
-              <h2>Join the expo</h2>
-            </div>
-            <p>Choose whether you are visiting or bringing a student project.</p>
+          <div>
+            <p>The EWB Campus Expo took place on 20 March 2025. I used that event as the idea for a simple portal where visitors could explore booths, follow the schedule, and try a reservation flow.</p>
+            <a class="textArrow" href="about.html">Read the project story →</a>
           </div>
-
-          <div class="reservationLayout">
-            <div class="choicePanel">
-              <button type="button" :class="{ selected: activeForm === 'visitor' }" @click="activeForm = 'visitor'; message = ''">
-                <span>Visitor</span>
-                <small>Reserve 1–4 seats</small>
-              </button>
-              <button type="button" :class="{ selected: activeForm === 'booth' }" @click="activeForm = 'booth'; message = ''">
-                <span>Exhibitor</span>
-                <small>Request one booth</small>
-              </button>
-            </div>
-
-            <form v-if="activeForm === 'visitor'" class="plainForm" @submit.prevent="reserveVisitor">
-              <div class="formTitle">
-                <span>VISITOR FORM</span>
-                <strong>{{ visitorSpotsLeft }} seats available</strong>
-              </div>
-
-              <label>Full name
-                <input v-model.trim="visitor.name" required minlength="2" maxlength="70" autocomplete="name">
-              </label>
-
-              <label>Email
-                <input v-model.trim="visitor.email" type="email" required autocomplete="email">
-              </label>
-
-              <div class="twoCols">
-                <label>Arrival slot
-                  <select v-model="visitor.slot" required>
-                    <option value="10:00">10:00</option>
-                    <option value="12:00">12:00</option>
-                    <option value="14:00">14:00</option>
-                  </select>
-                </label>
-                <label>Seats
-                  <input v-model.number="visitor.seats" type="number" min="1" :max="Math.min(4, visitorSpotsLeft)" required>
-                </label>
-              </div>
-
-              <button class="submitButton" type="submit" :disabled="visitorSpotsLeft === 0">Reserve seats</button>
-            </form>
-
-            <form v-else class="plainForm" @submit.prevent="submitBooth">
-              <div class="formTitle">
-                <span>BOOTH REQUEST</span>
-                <strong>{{ boothSpotsLeft }} spaces available</strong>
-              </div>
-
-              <label>Team or club name
-                <input v-model.trim="boothForm.team" required minlength="2" maxlength="70">
-              </label>
-
-              <label>Project title
-                <input v-model.trim="boothForm.title" required minlength="3" maxlength="80">
-              </label>
-
-              <div class="twoCols">
-                <label>Area
-                  <select v-model="boothForm.category" required>
-                    <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
-                  </select>
-                </label>
-                <label>Team size
-                  <input v-model.number="boothForm.members" type="number" min="1" max="8" required>
-                </label>
-              </div>
-
-              <label>What will you show?
-                <textarea v-model.trim="boothForm.summary" rows="4" required minlength="10" maxlength="240"></textarea>
-              </label>
-
-              <button class="submitButton" type="submit" :disabled="boothSpotsLeft === 0">Add booth request</button>
-            </form>
-          </div>
-
-          <p v-if="message" class="formMessage" role="status">{{ message }}</p>
         </section>
       </main>
 
       <footer>
         <div class="pageShell footerInner">
-          <p>EWB An-Najah · Campus Expo</p>
-          <button type="button" @click="resetDemo">Reset sample data</button>
+          <p>EWB Campus Expo 2025 · An-Najah</p>
+          <a href="about.html">Project info</a>
         </div>
       </footer>
     </div>
