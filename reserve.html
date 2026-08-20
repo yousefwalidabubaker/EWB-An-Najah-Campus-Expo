@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Reservation demo for EWB Campus Expo 2025.">
+    <meta name="description" content="Reservations for EWB Campus Expo 2025.">
     <title>Reserve | EWB Campus Expo 2025</title>
     <link rel="stylesheet" href="./src/styles.css">
   </head>
@@ -26,11 +26,12 @@
         <section class="pageHero">
           <p class="sectionLabel">03 / RESERVATIONS</p>
           <h1>Join the expo.</h1>
-          <p>This is the interactive part of the demo. Choose a visitor reservation or submit a student booth request.</p>
+          <p>Reserve a visitor seat or send a booth request for EWB Campus Expo 2025.</p>
+          <div class="symbolStrip" aria-hidden="true">✦ ★ ✦</div>
         </section>
 
         <section class="numbers miniNumbers" aria-label="Reservation numbers">
-          <div><strong>{{ visitorCount }}</strong><span>demo reservations</span></div>
+          <div><strong>{{ visitorCount }}</strong><span>visitor reservations</span></div>
           <div><strong>{{ visitorSpotsLeft }}</strong><span>visitor seats left</span></div>
           <div><strong>{{ booths.length }}</strong><span>booths listed</span></div>
           <div><strong>{{ boothSpotsLeft }}</strong><span>booth spaces left</span></div>
@@ -113,7 +114,6 @@
           </div>
 
           <p v-if="message" class="formMessage" role="status">{{ message }}</p>
-          <button class="resetButton" type="button" @click="resetDemo">Reset demo data</button>
         </section>
       </main>
 
