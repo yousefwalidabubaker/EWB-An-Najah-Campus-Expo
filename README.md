@@ -8,7 +8,7 @@ The project is a demo, so the real event date and time are left as **To be annou
 
 ## Live Demo
 
-https://yousefwalidabubaker.github.io/CampusFlow/
+https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 
 ## What it does
 
@@ -60,8 +60,8 @@ EWB-An-Najah-Campus-Expo/
 Clone the repository and open `index.html` with a local server such as Live Server in VS Code.
 
 ```bash
-git clone https://github.com/yousefwalidabubaker/CampusFlow.git
-cd CampusFlow
+git clone https://github.com/yousefwalidabubaker/EWB-An-Najah-Campus-Expo.git
+cd EWB-An-Najah-Campus-Expo
 ```
 
 The project does not need a backend or database.
