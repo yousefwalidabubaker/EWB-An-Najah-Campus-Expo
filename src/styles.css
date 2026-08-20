@@ -7,13 +7,17 @@
 }
 
 :root {
-  --red: #e51b23;
-  --yellow: #ffd400;
+  --red: #c92a2a;
+  --red-dark: #a61f1f;
+  --yellow: #f3c746;
+  --cream: #fffaf2;
   --white: #ffffff;
-  --black: #171717;
-  --gray: #666666;
-  --line: #d8d8d8;
-  --soft-yellow: #fff8cc;
+  --black: #1f1f1f;
+  --gray: #6b6b6b;
+  --line: #eadfce;
+  --soft-red: #fff1f1;
+  --soft-yellow: #fff6d6;
+  --shadow: 0 10px 24px rgba(0, 0, 0, .06);
 }
 
 html {
@@ -22,10 +26,10 @@ html {
 
 body {
   margin: 0;
-  background: var(--white);
+  background: var(--cream);
   color: var(--black);
   font-family: Arial, Helvetica, sans-serif;
-  line-height: 1.5;
+  line-height: 1.6;
 }
 
 button,
@@ -40,18 +44,22 @@ a {
 }
 
 .pageShell {
-  width: min(1040px, calc(100% - 36px));
+  width: min(1040px, calc(100% - 40px));
   margin: 0 auto;
 }
 
 .topbar {
+  position: sticky;
+  top: 0;
+  z-index: 20;
   background: var(--red);
   color: var(--white);
-  border-bottom: 6px solid var(--yellow);
+  border-bottom: 4px solid var(--yellow);
+  box-shadow: 0 4px 14px rgba(0, 0, 0, .08);
 }
 
 .topbarInner {
-  min-height: 68px;
+  min-height: 70px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -59,30 +67,31 @@ a {
 }
 
 .wordmark {
-  font-size: 19px;
+  font-size: 18px;
   font-weight: 800;
   text-decoration: none;
   white-space: nowrap;
+  letter-spacing: .02em;
 }
 
 nav {
   display: flex;
   align-items: center;
-  gap: 20px;
+  gap: 8px;
   font-size: 14px;
 }
 
 nav a {
-  padding: 6px 0;
+  padding: 8px 12px;
+  border-radius: 999px;
   text-decoration: none;
   font-weight: 700;
-  border-bottom: 3px solid transparent;
+  transition: .18s ease;
 }
 
 nav a:hover,
 nav a.active {
-  color: var(--yellow);
-  border-bottom-color: var(--yellow);
+  background: rgba(255, 255, 255, .15);
 }
 
 main {
@@ -97,39 +106,41 @@ main {
   font-family: "Courier New", monospace;
   font-size: 12px;
   font-weight: 700;
-  letter-spacing: .04em;
+  letter-spacing: .05em;
 }
 
 .intro {
   display: grid;
   grid-template-columns: 1.55fr .75fr;
-  gap: 54px;
-  padding: 72px 0 58px;
-  border-bottom: 2px solid var(--black);
+  gap: 56px;
+  padding: 84px 0 58px;
+  border-bottom: 1px solid var(--line);
 }
 
 .intro h1,
 .pageHero h1 {
-  margin: 14px 0 20px;
+  margin: 14px 0 22px;
   font-family: Georgia, "Times New Roman", serif;
-  font-size: clamp(52px, 8vw, 88px);
-  font-weight: 400;
-  line-height: .95;
-  letter-spacing: -.03em;
+  font-size: clamp(54px, 8vw, 88px);
+  font-weight: 500;
+  line-height: .96;
+  letter-spacing: -.035em;
 }
 
 .intro h1 span {
   display: inline-block;
-  background: var(--yellow);
+  padding: 1px 10px 6px;
+  border-radius: 14px;
+  background: var(--soft-yellow);
   color: var(--red);
-  padding: 0 8px 5px;
 }
 
 .lead,
 .pageHero > p,
 .pageHero > div > p {
-  max-width: 690px;
-  margin: 0 0 24px;
+  max-width: 700px;
+  margin: 0 0 26px;
+  color: #3e3e3e;
   font-size: 18px;
 }
 
@@ -142,30 +153,41 @@ main {
 
 .textLink,
 .outlineLink {
-  display: inline-block;
-  padding: 10px 14px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  padding: 0 17px;
+  border-radius: 12px;
   font-weight: 700;
   text-decoration: none;
+  transition: .18s ease;
 }
 
 .textLink {
   background: var(--red);
   color: var(--white);
+  box-shadow: var(--shadow);
 }
 
 .textLink:hover {
-  background: var(--black);
+  background: var(--red-dark);
+  transform: translateY(-1px);
 }
 
 .outlineLink {
-  border: 2px solid var(--black);
+  border: 1px solid var(--line);
+  background: var(--white);
 }
 
 .outlineLink:hover {
-  background: var(--yellow);
+  border-color: var(--yellow);
+  background: var(--soft-yellow);
+  transform: translateY(-1px);
 }
 
 .textArrow {
+  color: var(--red);
   font-weight: 700;
   text-decoration: none;
 }
@@ -176,13 +198,15 @@ main {
 
 .eventNote {
   align-self: end;
-  padding: 18px;
-  background: var(--yellow);
-  border: 2px solid var(--black);
+  padding: 22px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow);
 }
 
 .noteTitle {
-  color: var(--black);
+  color: var(--red);
 }
 
 .eventNote dl {
@@ -193,8 +217,8 @@ main {
   display: grid;
   grid-template-columns: 66px 1fr;
   gap: 12px;
-  padding: 9px 0;
-  border-bottom: 1px solid rgba(0, 0, 0, .25);
+  padding: 10px 0;
+  border-bottom: 1px solid var(--line);
 }
 
 .eventNote dl div:last-child {
@@ -202,8 +226,8 @@ main {
 }
 
 .eventNote dt {
+  color: var(--gray);
   font-size: 13px;
-  color: #444;
 }
 
 .eventNote dd {
@@ -214,39 +238,39 @@ main {
 .numbers {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  background: var(--black);
-  color: var(--white);
+  gap: 14px;
+  margin-top: 28px;
 }
 
 .numbers div {
-  padding: 24px 18px;
-  border-right: 1px solid #444;
-}
-
-.numbers div:last-child {
-  border-right: 0;
+  padding: 22px 18px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
+  box-shadow: var(--shadow);
 }
 
 .numbers strong {
   display: block;
+  margin-bottom: 4px;
+  color: var(--red);
   font-family: Georgia, "Times New Roman", serif;
-  font-size: 36px;
-  font-weight: 400;
-  color: var(--yellow);
+  font-size: 35px;
+  font-weight: 500;
 }
 
 .numbers span {
+  color: var(--gray);
   font-size: 13px;
-  color: #dddddd;
 }
 
 .sectionBlock {
   padding: 64px 0;
-  border-bottom: 2px solid var(--black);
+  border-bottom: 1px solid var(--line);
 }
 
 .compactTop {
-  padding-top: 36px;
+  padding-top: 40px;
 }
 
 .sectionHead {
@@ -265,8 +289,8 @@ main {
   margin: 8px 0 0;
   font-family: Georgia, "Times New Roman", serif;
   font-size: clamp(34px, 5vw, 48px);
-  font-weight: 400;
-  line-height: 1;
+  font-weight: 500;
+  line-height: 1.05;
 }
 
 .sectionHead > p {
@@ -278,20 +302,24 @@ main {
 .featureGrid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  border-top: 2px solid var(--black);
-  border-left: 2px solid var(--black);
+  gap: 18px;
 }
 
 .featureCard {
-  min-height: 210px;
+  min-height: 205px;
   padding: 24px;
-  border-right: 2px solid var(--black);
-  border-bottom: 2px solid var(--black);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow);
   text-decoration: none;
+  transition: .18s ease;
 }
 
 .featureCard:hover {
-  background: var(--yellow);
+  border-color: #e4c55c;
+  background: var(--soft-yellow);
+  transform: translateY(-2px);
 }
 
 .featureCard > span,
@@ -302,20 +330,16 @@ main {
 }
 
 .featureCard h3 {
-  margin: 32px 0 8px;
+  margin: 30px 0 8px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 27px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .featureCard p {
   max-width: 360px;
   margin: 0;
   color: var(--gray);
-}
-
-.featureCard:hover p {
-  color: var(--black);
 }
 
 .homeStory,
@@ -328,11 +352,12 @@ main {
 .homeStory p,
 .projectNotes p {
   margin-top: 0;
+  color: #4b4b4b;
 }
 
 .pageHero {
-  padding: 72px 0 42px;
-  border-bottom: 2px solid var(--black);
+  padding: 76px 0 44px;
+  border-bottom: 1px solid var(--line);
 }
 
 .pageHero h1 {
@@ -349,16 +374,18 @@ main {
 .dateStamp {
   display: grid;
   justify-items: center;
-  padding: 20px;
-  background: var(--yellow);
-  border: 2px solid var(--black);
+  padding: 22px;
+  border: 1px solid #efd47d;
+  border-radius: 18px;
+  background: var(--soft-yellow);
+  box-shadow: var(--shadow);
 }
 
 .dateStamp span {
-  font-family: Georgia, "Times New Roman", serif;
-  font-size: 78px;
-  line-height: .9;
   color: var(--red);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 76px;
+  line-height: .9;
 }
 
 .dateStamp strong {
@@ -368,19 +395,20 @@ main {
 
 .dateStamp small {
   margin-top: 2px;
+  color: var(--gray);
 }
 
 .directoryTools {
   display: grid;
   grid-template-columns: 1fr 220px;
   gap: 16px;
-  margin-bottom: 16px;
+  margin-bottom: 18px;
 }
 
 .directoryTools label,
 .plainForm label {
   display: grid;
-  gap: 6px;
+  gap: 7px;
   color: var(--gray);
   font-size: 13px;
 }
@@ -389,30 +417,31 @@ input,
 select,
 textarea {
   width: 100%;
-  border: 2px solid var(--black);
-  border-radius: 0;
+  border: 1px solid var(--line);
+  border-radius: 12px;
   background: var(--white);
   color: var(--black);
   outline: none;
+  transition: .15s ease;
 }
 
 input,
 select {
-  height: 44px;
-  padding: 0 10px;
+  height: 46px;
+  padding: 0 12px;
 }
 
 textarea {
-  min-height: 100px;
-  padding: 10px;
+  min-height: 104px;
+  padding: 12px;
   resize: vertical;
 }
 
 input:focus,
 select:focus,
 textarea:focus {
-  outline: 3px solid var(--yellow);
   border-color: var(--red);
+  box-shadow: 0 0 0 4px rgba(201, 42, 42, .08);
 }
 
 .resultLine {
@@ -422,7 +451,8 @@ textarea:focus {
 }
 
 .boothList {
-  border-top: 2px solid var(--black);
+  display: grid;
+  gap: 12px;
 }
 
 .boothRow {
@@ -431,11 +461,18 @@ textarea:focus {
   gap: 18px;
   align-items: center;
   min-height: 88px;
-  border-bottom: 1px solid var(--line);
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--white);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .035);
+  transition: .18s ease;
 }
 
 .boothRow:hover {
-  background: var(--soft-yellow);
+  border-color: #e7cf84;
+  background: #fffdf8;
+  transform: translateY(-1px);
 }
 
 .boothNumber {
@@ -448,7 +485,7 @@ textarea:focus {
   margin: 0 0 3px;
   font-family: Georgia, "Times New Roman", serif;
   font-size: 22px;
-  font-weight: 400;
+  font-weight: 500;
 }
 
 .boothMain p {
@@ -459,9 +496,10 @@ textarea:focus {
 
 .boothCategory {
   justify-self: end;
-  padding: 5px 8px;
-  background: var(--yellow);
-  border: 1px solid var(--black);
+  padding: 6px 9px;
+  border: 1px solid #ead17c;
+  border-radius: 999px;
+  background: var(--soft-yellow);
   font-family: "Courier New", monospace;
   font-size: 11px;
   text-transform: uppercase;
@@ -473,22 +511,26 @@ textarea:focus {
 }
 
 .scheduleList {
+  display: grid;
+  gap: 12px;
   margin: 0;
   padding: 0;
   list-style: none;
-  border-top: 2px solid var(--black);
 }
 
 .scheduleList li {
   display: grid;
   grid-template-columns: 110px 1fr;
   gap: 24px;
-  padding: 20px 0;
-  border-bottom: 1px solid var(--line);
+  padding: 20px;
+  border: 1px solid var(--line);
+  border-radius: 15px;
+  background: var(--white);
+  box-shadow: 0 5px 16px rgba(0, 0, 0, .035);
 }
 
 .bigSchedule li {
-  padding: 28px 0;
+  padding: 26px 22px;
 }
 
 .scheduleList time {
@@ -511,21 +553,18 @@ textarea:focus {
 .factGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
   margin-top: 40px;
-  border: 2px solid var(--black);
 }
 
 .infoStrip div,
 .factGrid div {
   display: grid;
-  gap: 8px;
+  gap: 7px;
   padding: 20px;
-  border-right: 1px solid var(--black);
-}
-
-.infoStrip div:last-child,
-.factGrid div:last-child {
-  border-right: 0;
+  border: 1px solid var(--line);
+  border-radius: 14px;
+  background: var(--white);
 }
 
 .infoStrip span,
@@ -549,20 +588,21 @@ textarea:focus {
 .choicePanel {
   display: grid;
   align-content: start;
-  border-top: 2px solid var(--black);
+  gap: 10px;
 }
 
 .choicePanel button {
   display: grid;
   gap: 3px;
   width: 100%;
-  padding: 16px 10px;
-  border: 0;
-  border-bottom: 1px solid var(--line);
+  padding: 16px 14px;
+  border: 1px solid var(--line);
+  border-radius: 13px;
   background: var(--white);
   color: var(--black);
   text-align: left;
   cursor: pointer;
+  transition: .15s ease;
 }
 
 .choicePanel button:hover {
@@ -570,8 +610,9 @@ textarea:focus {
 }
 
 .choicePanel button.selected {
-  background: var(--yellow);
-  border-left: 6px solid var(--red);
+  border-color: #e8c55d;
+  background: var(--soft-yellow);
+  box-shadow: inset 4px 0 0 var(--red);
 }
 
 .choicePanel span {
@@ -586,14 +627,19 @@ textarea:focus {
   display: grid;
   gap: 18px;
   max-width: 590px;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  background: var(--white);
+  box-shadow: var(--shadow);
 }
 
 .formTitle {
   display: flex;
   justify-content: space-between;
   gap: 16px;
-  padding-bottom: 10px;
-  border-bottom: 2px solid var(--black);
+  padding-bottom: 12px;
+  border-bottom: 1px solid var(--line);
 }
 
 .formTitle strong {
@@ -611,30 +657,35 @@ textarea:focus {
   min-width: 150px;
   min-height: 44px;
   padding: 0 18px;
-  border: 2px solid var(--black);
-  border-radius: 0;
+  border: 0;
+  border-radius: 12px;
   background: var(--red);
   color: var(--white);
+  box-shadow: var(--shadow);
   font-weight: 700;
   cursor: pointer;
+  transition: .18s ease;
 }
 
 .submitButton:hover {
-  background: var(--yellow);
-  color: var(--black);
+  background: var(--red-dark);
+  transform: translateY(-1px);
 }
 
 .submitButton:disabled {
   opacity: .45;
   cursor: not-allowed;
+  transform: none;
 }
 
 .formMessage {
   max-width: 866px;
   margin: 22px 0 0 276px;
-  padding: 10px 12px;
-  border-left: 6px solid var(--red);
-  background: var(--yellow);
+  padding: 12px 14px;
+  border: 1px solid #ead17c;
+  border-left: 5px solid var(--red);
+  border-radius: 10px;
+  background: var(--soft-yellow);
   font-size: 14px;
 }
 
@@ -654,9 +705,10 @@ textarea:focus {
   justify-content: space-between;
   gap: 30px;
   margin-top: 48px;
-  padding: 34px;
+  padding: 32px;
+  border: 1px solid #ead17c;
+  border-radius: 18px;
   background: var(--soft-yellow);
-  border: 2px solid var(--black);
 }
 
 .pageCallout h2 {
@@ -666,25 +718,19 @@ textarea:focus {
 .aboutGrid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: 0;
+  gap: 16px;
 }
 
 .aboutGrid article {
-  padding: 0 28px 0 0;
-  border-right: 1px solid var(--line);
-}
-
-.aboutGrid article:not(:first-child) {
-  padding-left: 28px;
-}
-
-.aboutGrid article:last-child {
-  border-right: 0;
+  padding: 24px;
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  background: var(--white);
 }
 
 .aboutGrid h2 {
-  margin: 24px 0 14px;
-  font-size: 32px;
+  margin: 22px 0 12px;
+  font-size: 31px;
 }
 
 .aboutGrid p {
@@ -692,13 +738,14 @@ textarea:focus {
 }
 
 footer {
-  background: var(--red);
-  color: var(--white);
-  border-top: 6px solid var(--yellow);
+  margin-top: 40px;
+  border-top: 1px solid var(--line);
+  background: var(--white);
+  color: var(--black);
 }
 
 .footerInner {
-  min-height: 74px;
+  min-height: 76px;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -711,7 +758,7 @@ footer {
 }
 
 .footerInner a {
-  color: var(--yellow);
+  color: var(--red);
   font-weight: 700;
 }
 
@@ -725,7 +772,7 @@ footer {
   nav {
     width: 100%;
     flex-wrap: wrap;
-    gap: 10px 18px;
+    gap: 8px;
   }
 
   .intro,
@@ -739,37 +786,23 @@ footer {
 
   .intro {
     gap: 36px;
-    padding-top: 50px;
+    padding-top: 56px;
   }
 
   .eventNote {
     max-width: 480px;
   }
 
-  .numbers {
+  .numbers,
+  .featureGrid,
+  .aboutGrid,
+  .factGrid,
+  .infoStrip {
     grid-template-columns: repeat(2, 1fr);
   }
 
   .directoryTools {
     grid-template-columns: 1fr;
-  }
-
-  .featureGrid,
-  .aboutGrid,
-  .factGrid,
-  .infoStrip {
-    grid-template-columns: 1fr 1fr;
-  }
-
-  .aboutGrid article,
-  .aboutGrid article:not(:first-child) {
-    padding: 24px 18px;
-    border-right: 0;
-    border-bottom: 1px solid var(--line);
-  }
-
-  .aboutGrid article:last-child {
-    border-bottom: 0;
   }
 
   .formMessage,
@@ -781,6 +814,14 @@ footer {
 @media (max-width: 560px) {
   .pageShell {
     width: min(100% - 24px, 1040px);
+  }
+
+  .topbar {
+    position: static;
+  }
+
+  nav a {
+    padding: 7px 9px;
   }
 
   .intro h1,
@@ -796,28 +837,10 @@ footer {
     grid-template-columns: 1fr;
   }
 
-  .numbers div,
-  .infoStrip div,
-  .factGrid div {
-    border-right: 0;
-    border-bottom: 1px solid #444;
-  }
-
-  .infoStrip div,
-  .factGrid div {
-    border-bottom-color: var(--black);
-  }
-
-  .numbers div:last-child,
-  .infoStrip div:last-child,
-  .factGrid div:last-child {
-    border-bottom: 0;
-  }
-
   .boothRow {
     grid-template-columns: 38px 1fr;
     gap: 12px;
-    padding: 14px 0;
+    padding: 15px;
   }
 
   .boothCategory {
@@ -828,6 +851,7 @@ footer {
   .scheduleList li {
     grid-template-columns: 72px 1fr;
     gap: 14px;
+    padding: 18px;
   }
 
   .twoCols {
@@ -837,6 +861,10 @@ footer {
   .pageCallout {
     align-items: flex-start;
     flex-direction: column;
+  }
+
+  .plainForm {
+    padding: 18px;
   }
 
   .footerInner {
