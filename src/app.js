@@ -11,7 +11,10 @@ const MAX_VISITOR_SEATS = 180;
 const MAX_BOOTHS = 12;
 
 function readStoredNumber(key, fallback) {
-  const value = Number(localStorage.getItem(key));
+  const stored = localStorage.getItem(key);
+  if (stored === null) return fallback;
+
+  const value = Number(stored);
   return Number.isFinite(value) && value >= 0 ? value : fallback;
 }
 
