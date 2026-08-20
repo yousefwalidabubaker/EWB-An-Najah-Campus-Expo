@@ -1,30 +1,30 @@
 # EWB Campus Expo 2025
 
-Event website for **EWB Campus Expo 2025**, held at An-Najah National University on **20 March 2025** by EWB An-Najah.
+Website for **EWB Campus Expo 2025**, held at An-Najah National University on **20 March 2025** by EWB An-Najah.
 
 ## Live Website
 
 https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 
-## Website Pages
+## What the Website Includes
 
-- **Home** - event overview and main links
+- **Home** - event overview, date, location, and quick links
 - **Booths** - searchable and filterable booth directory
-- **Schedule** - expo day schedule
+- **Schedule** - expo day activities and timing
 - **Reserve** - visitor reservation and exhibitor booth request forms
-- **About** - event information and EWB An-Najah
+- **About** - information about the expo and EWB An-Najah
 
-## Features
+## Interactive Features
 
 - Search booths by project or team name
-- Filter booths by area
+- Filter booths by category
 - Reserve between 1 and 4 visitor seats
-- Update remaining seat availability after a reservation
-- Submit an exhibitor booth request
-- Add submitted booths to the directory
-- Track remaining booth spaces
-- Save reservation and booth information in browser local storage
-- Responsive layout for desktop and mobile
+- Update the remaining visitor seat count after a reservation
+- Switch between visitor and exhibitor forms
+- Submit a booth request and add it to the booth directory
+- Update the remaining booth count after a request
+- Save booth and reservation changes in browser local storage
+- Keep the interface responsive on desktop and mobile
 
 ## Built With
 
@@ -35,7 +35,7 @@ https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 - Browser Local Storage
 - GitHub Pages
 
-## Structure
+## Project Structure
 
 ```text
 EWB-An-Najah-Campus-Expo/
@@ -44,6 +44,7 @@ EWB-An-Najah-Campus-Expo/
 ├── schedule.html
 ├── reserve.html
 ├── about.html
+├── favicon.svg
 └── src/
     ├── app.js
     └── styles.css
@@ -51,9 +52,16 @@ EWB-An-Najah-Campus-Expo/
 
 ## Run Locally
 
+Clone the repository:
+
 ```bash
 git clone https://github.com/yousefwalidabubaker/EWB-An-Najah-Campus-Expo.git
 cd EWB-An-Najah-Campus-Expo
 ```
 
-Open `index.html` with a local server such as Live Server in VS Code.
+Then open `index.html` with a local server such as Live Server in VS Code.
+
+## Links
+
+- Live website: https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
+- GitHub repository: https://github.com/yousefwalidabubaker/EWB-An-Najah-Campus-Expo
