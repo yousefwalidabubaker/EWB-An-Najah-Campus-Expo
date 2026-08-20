@@ -1,0 +1,131 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Reservation demo for EWB Campus Expo 2025.">
+    <title>Reserve | EWB Campus Expo 2025</title>
+    <link rel="stylesheet" href="./src/styles.css">
+  </head>
+  <body>
+    <div id="app" v-cloak>
+      <header class="topbar">
+        <div class="pageShell topbarInner">
+          <a class="wordmark" href="index.html">EWB / AN-NAJAH</a>
+          <nav aria-label="Main navigation">
+            <a href="index.html">Home</a>
+            <a href="booths.html">Booths</a>
+            <a href="schedule.html">Schedule</a>
+            <a class="active" href="reserve.html">Reserve</a>
+            <a href="about.html">About</a>
+          </nav>
+        </div>
+      </header>
+
+      <main class="pageShell">
+        <section class="pageHero">
+          <p class="sectionLabel">03 / RESERVATIONS</p>
+          <h1>Join the expo.</h1>
+          <p>This is the interactive part of the demo. Choose a visitor reservation or submit a student booth request.</p>
+        </section>
+
+        <section class="numbers miniNumbers" aria-label="Reservation numbers">
+          <div><strong>{{ visitorCount }}</strong><span>demo reservations</span></div>
+          <div><strong>{{ visitorSpotsLeft }}</strong><span>visitor seats left</span></div>
+          <div><strong>{{ booths.length }}</strong><span>booths listed</span></div>
+          <div><strong>{{ boothSpotsLeft }}</strong><span>booth spaces left</span></div>
+        </section>
+
+        <section class="sectionBlock reserveBlock compactTop">
+          <div class="reservationLayout">
+            <div class="choicePanel">
+              <button type="button" :class="{ selected: activeForm === 'visitor' }" @click="activeForm = 'visitor'; message = ''">
+                <span>Visitor</span>
+                <small>Reserve 1–4 seats</small>
+              </button>
+              <button type="button" :class="{ selected: activeForm === 'booth' }" @click="activeForm = 'booth'; message = ''">
+                <span>Exhibitor</span>
+                <small>Request one booth</small>
+              </button>
+            </div>
+
+            <form v-if="activeForm === 'visitor'" class="plainForm" @submit.prevent="reserveVisitor">
+              <div class="formTitle">
+                <span>VISITOR FORM</span>
+                <strong>{{ visitorSpotsLeft }} seats available</strong>
+              </div>
+
+              <label>Full name
+                <input v-model.trim="visitor.name" required minlength="2" maxlength="70" autocomplete="name">
+              </label>
+
+              <label>Email
+                <input v-model.trim="visitor.email" type="email" required autocomplete="email">
+              </label>
+
+              <div class="twoCols">
+                <label>Arrival slot
+                  <select v-model="visitor.slot" required>
+                    <option value="10:00">10:00</option>
+                    <option value="12:00">12:00</option>
+                    <option value="14:00">14:00</option>
+                  </select>
+                </label>
+                <label>Seats
+                  <input v-model.number="visitor.seats" type="number" min="1" :max="Math.min(4, visitorSpotsLeft)" required>
+                </label>
+              </div>
+
+              <button class="submitButton" type="submit" :disabled="visitorSpotsLeft === 0">Reserve seats</button>
+            </form>
+
+            <form v-else class="plainForm" @submit.prevent="submitBooth">
+              <div class="formTitle">
+                <span>BOOTH REQUEST</span>
+                <strong>{{ boothSpotsLeft }} spaces available</strong>
+              </div>
+
+              <label>Team or club name
+                <input v-model.trim="boothForm.team" required minlength="2" maxlength="70">
+              </label>
+
+              <label>Project title
+                <input v-model.trim="boothForm.title" required minlength="3" maxlength="80">
+              </label>
+
+              <div class="twoCols">
+                <label>Area
+                  <select v-model="boothForm.category" required>
+                    <option v-for="category in categories" :key="category" :value="category">{{ category }}</option>
+                  </select>
+                </label>
+                <label>Team size
+                  <input v-model.number="boothForm.members" type="number" min="1" max="8" required>
+                </label>
+              </div>
+
+              <label>What will you show?
+                <textarea v-model.trim="boothForm.summary" rows="4" required minlength="10" maxlength="240"></textarea>
+              </label>
+
+              <button class="submitButton" type="submit" :disabled="boothSpotsLeft === 0">Add booth request</button>
+            </form>
+          </div>
+
+          <p v-if="message" class="formMessage" role="status">{{ message }}</p>
+          <button class="resetButton" type="button" @click="resetDemo">Reset demo data</button>
+        </section>
+      </main>
+
+      <footer>
+        <div class="pageShell footerInner">
+          <p>EWB Campus Expo 2025 · An-Najah</p>
+          <a href="booths.html">View booths</a>
+        </div>
+      </footer>
+    </div>
+
+    <script src="https://unpkg.com/vue@3/dist/vue.global.prod.js"></script>
+    <script src="./src/app.js"></script>
+  </body>
+</html>
