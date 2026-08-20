@@ -1,28 +1,33 @@
-# EWB An-Najah Campus Expo
+# EWB Campus Expo 2025
 
-A frontend portal for a student engineering expo at An-Najah National University.
+A multi-page frontend portal inspired by the real EWB Campus Expo held at An-Najah National University on **20 March 2025**.
 
-The idea came from my time working with Engineers Without Borders at An-Najah. I wanted one simple page where students could see who is exhibiting, check the schedule, reserve visitor seats, or request a booth for a student project.
-
-This project is based on a real EWB An-Najah Campus Expo held on **20 March 2025**.
+I built the project around a simple idea: instead of putting everything on one long page, visitors can move through separate pages for the booth directory, schedule, reservations, and information about the expo.
 
 ## Live Demo
 
 https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 
-## What it does
+## Pages
 
-- Shows a directory of student project booths
+- **Home** - event overview and links to the main parts of the portal
+- **Booths** - searchable and filterable student project directory
+- **Schedule** - a demo day plan for the expo portal
+- **Reserve** - interactive visitor and exhibitor forms
+- **About** - project story, real event date, and what I practiced
+
+## Main features
+
 - Searches booths by project or team name
 - Filters booths by area
-- Displays a simple expo schedule
 - Lets visitors reserve between 1 and 4 seats
-- Updates the remaining visitor seat count after a reservation
+- Updates remaining visitor seats after a reservation
 - Lets student teams submit a booth request
-- Adds submitted booths directly to the directory
-- Tracks the remaining booth spaces
-- Keeps booth and reservation changes in browser local storage
-- Restores the original sample data with a reset button
+- Adds submitted booths to the directory
+- Tracks remaining booth spaces
+- Saves demo changes in browser local storage
+- Restores the sample data with a reset button
+- Uses the same responsive navigation and visual identity across multiple pages
 
 ## Built with
 
@@ -38,6 +43,10 @@ https://yousefwalidabubaker.github.io/EWB-An-Najah-Campus-Expo/
 ```text
 EWB-An-Najah-Campus-Expo/
 ├── index.html
+├── booths.html
+├── schedule.html
+├── reserve.html
+├── about.html
 └── src/
     ├── app.js
     └── styles.css
@@ -45,6 +54,7 @@ EWB-An-Najah-Campus-Expo/
 
 ## Things I practiced
 
+- Building a small multi-page website
 - Vue data and computed values
 - Form handling and validation
 - Button and input events
@@ -54,6 +64,11 @@ EWB-An-Najah-Campus-Expo/
 - Updating displayed information from user input
 - Saving simple data in local storage
 - Responsive CSS without a UI library
+- Keeping navigation and design consistent between pages
+
+## Note about the data
+
+The event name and date are real. The booth names, reservation numbers, and detailed schedule used in the website are demo data for the frontend project.
 
 ## Run locally
 
