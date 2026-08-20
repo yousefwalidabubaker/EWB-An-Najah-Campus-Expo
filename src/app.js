@@ -1,190 +1,136 @@
-const demoEvents = [
-  {
-    id: 1,
-    title: "AI Study Jam",
-    description: "A practical student session for experimenting with AI tools and sharing useful workflows.",
-    category: "Technology",
-    location: "New Campus Lab",
-    startsAt: "2026-09-12T15:00",
-    capacity: 30,
-    registered: 18
-  },
-  {
-    id: 2,
-    title: "CV Review Session",
-    description: "Bring your CV and get quick feedback before internship and graduate job applications.",
-    category: "Career",
-    location: "Career Center",
-    startsAt: "2026-09-18T12:30",
-    capacity: 20,
-    registered: 20
-  },
-  {
-    id: 3,
-    title: "Design for Developers",
-    description: "An introduction to simple design decisions that make student projects easier to use.",
-    category: "Design",
-    location: "Engineering Hall",
-    startsAt: "2026-09-24T14:00",
-    capacity: 25,
-    registered: 11
-  }
+const initialBooths = [
+  { id: 1, title: "Solar Water Monitor", team: "Civil & Energy Team", category: "Sustainability" },
+  { id: 2, title: "Smart Cane Prototype", team: "Assistive Tech Group", category: "Technology" },
+  { id: 3, title: "Low-Cost Greywater Filter", team: "Water Project Team", category: "Sustainability" },
+  { id: 4, title: "Bridge Model Challenge", team: "Structural Students", category: "Engineering" },
+  { id: 5, title: "Community Mapping Board", team: "EWB Volunteers", category: "Community" },
+  { id: 6, title: "Arduino Safety Alarm", team: "First-Year Makers", category: "Technology" }
 ];
 
-const savedEvents = localStorage.getItem("campusflow-events");
+const MAX_VISITOR_SEATS = 180;
+const MAX_BOOTHS = 12;
+
+function readStoredNumber(key, fallback) {
+  const value = Number(localStorage.getItem(key));
+  return Number.isFinite(value) && value >= 0 ? value : fallback;
+}
+
+function readStoredBooths() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("ewb-expo-booths"));
+    return Array.isArray(saved) && saved.length ? saved : structuredClone(initialBooths);
+  } catch {
+    return structuredClone(initialBooths);
+  }
+}
 
 Vue.createApp({
   data() {
     return {
-      events: savedEvents ? JSON.parse(savedEvents) : structuredClone(demoEvents),
-      search: "",
-      category: "all",
-      status: "all",
-      categories: ["Technology", "Career", "Design", "Community"],
-      showCreate: false,
-      showRegister: false,
-      selectedEvent: null,
+      categories: ["Engineering", "Technology", "Sustainability", "Community"],
+      booths: readStoredBooths(),
+      visitorCount: readStoredNumber("ewb-expo-visitors", 96),
+      boothSearch: "",
+      boothCategory: "all",
+      activeForm: "visitor",
       message: "",
-      messageTimer: null,
-      newEvent: {
-        title: "",
-        description: "",
-        category: "Technology",
-        location: "",
-        startsAt: "",
-        capacity: 30
-      },
-      registration: {
+      visitor: {
         name: "",
-        email: ""
+        email: "",
+        slot: "10:00",
+        seats: 1
+      },
+      boothForm: {
+        team: "",
+        title: "",
+        category: "Engineering",
+        members: 2,
+        summary: ""
       }
     };
   },
 
   computed: {
-    filteredEvents() {
-      const query = this.search.toLowerCase();
+    filteredBooths() {
+      const query = this.boothSearch.toLowerCase();
 
-      return this.events.filter((event) => {
-        const matchesSearch = [event.title, event.description, event.location]
+      return this.booths.filter((booth) => {
+        const matchesText = [booth.title, booth.team]
           .some((value) => value.toLowerCase().includes(query));
-
-        const matchesCategory = this.category === "all" || event.category === this.category;
-        const isFull = this.spotsLeft(event) === 0;
-        const matchesStatus = this.status === "all"
-          || (this.status === "full" && isFull)
-          || (this.status === "available" && !isFull);
-
-        return matchesSearch && matchesCategory && matchesStatus;
+        const matchesCategory = this.boothCategory === "all" || booth.category === this.boothCategory;
+        return matchesText && matchesCategory;
       });
     },
 
-    availableEvents() {
-      return this.events.filter((event) => this.spotsLeft(event) > 0).length;
+    visitorSpotsLeft() {
+      return Math.max(MAX_VISITOR_SEATS - this.visitorCount, 0);
     },
 
-    totalRegistrations() {
-      return this.events.reduce((total, event) => total + event.registered, 0);
-    },
-
-    occupancyRate() {
-      const totalCapacity = this.events.reduce((total, event) => total + event.capacity, 0);
-      if (totalCapacity === 0) return 0;
-      return Math.round((this.totalRegistrations / totalCapacity) * 100);
+    boothSpotsLeft() {
+      return Math.max(MAX_BOOTHS - this.booths.length, 0);
     }
   },
 
   methods: {
-    spotsLeft(event) {
-      return Math.max(event.capacity - event.registered, 0);
+    reserveVisitor() {
+      const seats = Number(this.visitor.seats);
+
+      if (!Number.isInteger(seats) || seats < 1 || seats > 4) {
+        this.message = "Choose between 1 and 4 seats.";
+        return;
+      }
+
+      if (seats > this.visitorSpotsLeft) {
+        this.message = "There are not enough visitor seats left.";
+        return;
+      }
+
+      this.visitorCount += seats;
+      localStorage.setItem("ewb-expo-visitors", String(this.visitorCount));
+
+      const name = this.visitor.name;
+      this.visitor = { name: "", email: "", slot: "10:00", seats: 1 };
+      this.message = `${name}, your ${seats === 1 ? "seat is" : "seats are"} reserved.`;
     },
 
-    occupancy(event) {
-      return Math.min(Math.round((event.registered / event.capacity) * 100), 100);
-    },
+    submitBooth() {
+      if (this.boothSpotsLeft === 0) {
+        this.message = "All booth spaces are currently taken.";
+        return;
+      }
 
-    createEvent() {
-      this.events.unshift({
-        id: Date.now(),
-        title: this.newEvent.title,
-        description: this.newEvent.description,
-        category: this.newEvent.category,
-        location: this.newEvent.location,
-        startsAt: this.newEvent.startsAt,
-        capacity: Number(this.newEvent.capacity),
-        registered: 0
+      const nextId = this.booths.reduce((highest, booth) => Math.max(highest, Number(booth.id)), 0) + 1;
+
+      this.booths.push({
+        id: nextId,
+        title: this.boothForm.title,
+        team: this.boothForm.team,
+        category: this.boothForm.category,
+        members: Number(this.boothForm.members),
+        summary: this.boothForm.summary
       });
 
-      this.saveEvents();
-      this.showCreate = false;
-      this.newEvent = {
+      localStorage.setItem("ewb-expo-booths", JSON.stringify(this.booths));
+      const projectTitle = this.boothForm.title;
+      this.boothForm = {
+        team: "",
         title: "",
-        description: "",
-        category: "Technology",
-        location: "",
-        startsAt: "",
-        capacity: 30
+        category: "Engineering",
+        members: 2,
+        summary: ""
       };
-      this.showMessage("Event created.");
-    },
-
-    openRegistration(event) {
-      if (this.spotsLeft(event) === 0) return;
-      this.selectedEvent = event;
-      this.registration = { name: "", email: "" };
-      this.showRegister = true;
-    },
-
-    closeRegistration() {
-      this.showRegister = false;
-      this.selectedEvent = null;
-    },
-
-    registerForEvent() {
-      if (!this.selectedEvent || this.spotsLeft(this.selectedEvent) === 0) return;
-
-      this.selectedEvent.registered += 1;
-      const eventTitle = this.selectedEvent.title;
-      this.saveEvents();
-      this.closeRegistration();
-      this.showMessage(`Registered for ${eventTitle}.`);
+      this.message = `${projectTitle} was added to the booth list.`;
     },
 
     resetDemo() {
-      this.events = structuredClone(demoEvents);
-      this.search = "";
-      this.category = "all";
-      this.status = "all";
-      this.saveEvents();
-      this.showMessage("Demo data reset.");
-    },
-
-    saveEvents() {
-      localStorage.setItem("campusflow-events", JSON.stringify(this.events));
-    },
-
-    formatDate(value) {
-      return new Intl.DateTimeFormat("en", {
-        month: "short",
-        day: "numeric",
-        year: "numeric"
-      }).format(new Date(value));
-    },
-
-    formatTime(value) {
-      return new Intl.DateTimeFormat("en", {
-        weekday: "short",
-        hour: "numeric",
-        minute: "2-digit"
-      }).format(new Date(value));
-    },
-
-    showMessage(text) {
-      clearTimeout(this.messageTimer);
-      this.message = text;
-      this.messageTimer = setTimeout(() => {
-        this.message = "";
-      }, 3000);
+      this.booths = structuredClone(initialBooths);
+      this.visitorCount = 96;
+      this.boothSearch = "";
+      this.boothCategory = "all";
+      this.activeForm = "visitor";
+      this.message = "Sample data restored.";
+      localStorage.removeItem("ewb-expo-booths");
+      localStorage.removeItem("ewb-expo-visitors");
     }
   }
 }).mount("#app");
